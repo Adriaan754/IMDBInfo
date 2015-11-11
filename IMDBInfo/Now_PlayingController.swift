@@ -1,5 +1,5 @@
 //
-//  SecondViewController.swift
+//  Now_PlayinController.swift
 //  IMDBInfo
 //
 //  Created by Adriaan Brands on 19-09-15.
@@ -8,11 +8,10 @@
 
 import UIKit
 
-class SecondViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,
+class Now_PlayingController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,
 UICollectionViewDelegateFlowLayout {
     
-    let URL_BASE = "http://api.themoviedb.org/3/movie/popular?api_key=0bc401d279fd392d8248f28581e9fd02"
-    let defaultSize = CGSize(width: 360, height: 460)
+    let URL_BASE = "http://api.themoviedb.org/3/movie/now_playing?api_key=0bc401d279fd392d8248f28581e9fd02"
     
     @IBOutlet weak var collectionView : UICollectionView!
     
@@ -40,8 +39,8 @@ UICollectionViewDelegateFlowLayout {
                 print(error.debugDescription)
             }else{
                 do{
-                let dict = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments)
-                    as? Dictionary<String,AnyObject>
+                    let dict = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments)
+                        as? Dictionary<String,AnyObject>
                     if let results = dict!["results"] as? [Dictionary<String,AnyObject>]{
                         
                         print(results)
@@ -54,7 +53,7 @@ UICollectionViewDelegateFlowLayout {
                         dispatch_async(dispatch_get_main_queue()){
                             self.collectionView.reloadData()
                         }
-                }
+                    }
                 }
                 catch{
                     
